@@ -6,11 +6,15 @@ module EasyAPI
 
 	# Takes in object, text
 	def text_reply object, msg
+		object.mark_seen
+		sleep 1
 		msg = msg.gsub!(/[\n]*[\t]*/, "")
 		object.reply(text: msg)
 	end
 
 	def image_reply object, link
+		object.mark_seen
+		sleep 1
 		object.reply(
 			attachment: {
 				type: 'image',
@@ -23,6 +27,8 @@ module EasyAPI
 
 	# Takes in object, text, and array of buttons
 	def button_reply object, msg, buttons
+		object.mark_seen
+		sleep 1
 		object.reply(
 			attachment: {
 				type: 'template',
