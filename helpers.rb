@@ -12,6 +12,7 @@ module EasyAPI
 		object.reply(text: msg)
 	end
 
+	# Takes in object, link to image
 	def image_reply object, link
 		object.mark_seen
 		sleep 1
@@ -23,6 +24,16 @@ module EasyAPI
 				}
 			}
 		)
+	end
+
+	# Takes in user id and hash for message content and delivers the message
+	def send_msg_first id, msg
+		sleep 1
+		message_options = {
+			recipient: {id: id},
+			message: msg
+		}
+		Bot.deliver(message_options, access_token: ENV['ACCESS_TOKEN'])
 	end
 
 	# Takes in object, text, and array of buttons
