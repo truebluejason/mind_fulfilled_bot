@@ -28,8 +28,10 @@ class PostbackManager
 	def manage_date_message validations
 		Bot.on :message do |msg|
 			puts "Got a date message: #{msg.text}!"
+			puts msg.messaging.to_s
 			begin
-				date = Date.parse(msg.text).to_s
+				nlp = msg.messaging["message"]["nlp"]["entities"]["datetime"][0]["value"]
+				date = Date.parse(nlp).to_s
 				puts "Date received – is #{date}"
 				show_logs_from_date @user_id, date
 				manage_postback validations
@@ -56,9 +58,8 @@ class PostbackManager
 			validations << PAYLOADS[:mood_bad]
 			manage_postback validations
 		when PAYLOADS[:menu_show_specific]
-			# TO BE IMPLEMENTED
-			ask_for_formatted_date pb
 			validations = default_validations
+			ask_for_formatted_date pb
 			manage_date_message validations
 		when PAYLOADS[:menu_show_all]
 			show_all_logs @user_id

@@ -140,7 +140,7 @@ end
 
 # Ask for formatted date to display logs from a date correctly
 def ask_for_formatted_date pb
-	text_reply(pb, "Please type the date of interest in the form yyyy-mm-dd.")
+	text_reply(pb, "Please type the date of interest.")
 end
 
 # Saves the user's string input along with date to the database
